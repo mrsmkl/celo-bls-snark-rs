@@ -25,8 +25,8 @@ To build the project, you should use a recent stable Rust version. We test with 
 ```bash
 # Build
 cargo build (--release)
-# Test. 
-# Consider running tests in release mode, as some of 
+# Test.
+# Consider running tests in release mode, as some of
 # the cryptographic operations are slow in debug mode.
 cargo test (--release)
 ```
@@ -39,18 +39,18 @@ Secret keys are elements of the scalar field *Fr*.
 
 We would like to minimize the computation required for signing, since we would also like to achieve hardware wallet compatibility. Therefore, public keys are in *G2* and signatures are in *G1*.
 
-For most signatures - to hash a message to *G1*, we use the try-and-increment method coupled with Blake2Xs. 
+For most signatures - to hash a message to *G1*, we use the try-and-increment method coupled with Blake2Xs.
 
 For signatures that we would like to verify in SNARKs - to hash a message to *G1*, we use the try-and-increment method coupled with a composite hash. The composite hash is composed of a Bowe-Hopwood hash over $E_{Ed/CP}$ from [BCGMMW18] and Blake2s.
 
-We perform cofactor muliplication in *G1* directly.
+We perform cofactor multiplication in *G1* directly.
 
 ## License
 
 celo-bls-snark-rs is licensed under either of the following licenses, at your discretion.
 
-Apache License Version 2.0 (LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
-MIT license (LICENSE-MIT or http://opensource.org/licenses/MIT)
+Apache License Version 2.0 (LICENSE-APACHE or <http://www.apache.org/licenses/LICENSE-2.0>)
+MIT license (LICENSE-MIT or <http://opensource.org/licenses/MIT>)
 Unless you explicitly state otherwise, any contribution submitted for inclusion in celo-bls-snark-rs by you shall be dual licensed as above (as defined in the Apache v2 License), without any additional terms or conditions.
 
 ## References

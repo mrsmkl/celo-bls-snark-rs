@@ -94,10 +94,12 @@ where
             (&mut counter[..]).write_u8(c as u8)?;
 
             // concatenate the message with the counter
-            let msg = &[&counter, extra_data, &message].concat();
+            let msg = &[&counter, message].concat();
 
             // produce a hash with sufficient length
-            let candidate_hash = self.hasher.hash(domain, msg, hash_bytes)?;
+            let prepared_message = self.hasher.crh(domain, msg, hash_bytes)?;
+            let msg_for_xof = &[&prepared_message, extra_data].concat();
+            let candidate_hash = self.hasher.xof(domain, msg_for_xof, hash_bytes)?;
 
             // handle the Celo deployed bit extraction logic
             #[cfg(feature = "compat")]

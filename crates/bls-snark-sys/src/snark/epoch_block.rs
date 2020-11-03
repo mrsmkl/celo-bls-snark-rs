@@ -53,6 +53,48 @@ pub extern "C" fn encode_epoch_block_to_bytes(
     })
 }
 
+#[no_mangle]
+pub extern "C" fn encode_epoch_block_to_bytes_in_parts(
+    in_epoch_index: c_ushort,
+    in_maximum_non_signers: c_uint,
+    in_added_public_keys: *const *const PublicKey,
+    in_added_public_keys_len: c_int,
+    out_bytes1: *mut *mut u8,
+    out_len1: *mut c_int,
+    out_bytes2: *mut *mut u8,
+    out_len2: *mut c_int,
+) -> bool {
+    convert_result_to_bool::<_, EncodingError, _>(|| {
+        let added_public_keys_ptrs = unsafe {
+            slice::from_raw_parts(in_added_public_keys, in_added_public_keys_len as usize)
+        };
+        let added_public_keys = added_public_keys_ptrs
+            .to_vec()
+            .into_iter()
+            .map(|pk| unsafe { &*pk }.clone())
+            .collect::<Vec<PublicKey>>();
+
+        let epoch_block = EpochBlock::new(
+            in_epoch_index as u16,
+            in_maximum_non_signers as u32,
+            added_public_keys,
+        );
+        let mut encoded1 = epoch_block.encode_index_to_bytes()?;
+        encoded1.shrink_to_fit();
+        let mut encoded2 = epoch_block.encode_block_data_to_bytes()?;
+        encoded2.shrink_to_fit();
+        unsafe {
+            *out_bytes1 = encoded1.as_mut_ptr();
+            *out_len1 = encoded1.len() as c_int;
+            *out_bytes2 = encoded2.as_mut_ptr();
+            *out_len2 = encoded2.len() as c_int;
+        }
+        std::mem::forget(encoded1);
+        std::mem::forget(encoded2);
+        Ok(())
+    })
+}
+
 /// Data structure received from consumers of the FFI interface describing
 /// an epoch block.
 #[repr(C)]

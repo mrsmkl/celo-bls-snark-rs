@@ -90,6 +90,31 @@ impl EpochBlock {
     pub fn encode_to_bytes_with_aggregated_pk(&self) -> Result<Vec<u8>, EncodingError> {
         Ok(bits_to_bytes(&self.encode_to_bits_with_aggregated_pk()?))
     }
+
+    /// Encodes the block to LE bits
+    pub fn encode_index_to_bits(&self) -> Result<Vec<bool>, EncodingError> {
+        let mut epoch_bits = vec![];
+        epoch_bits.extend_from_slice(&encode_u16(self.index)?);
+        Ok(epoch_bits)
+    }
+
+    pub fn encode_block_data_to_bits(&self) -> Result<Vec<bool>, EncodingError> {
+        let mut epoch_bits = vec![];
+        epoch_bits.extend_from_slice(&encode_u32(self.maximum_non_signers)?);
+        for added_public_key in &self.new_public_keys {
+            epoch_bits.extend_from_slice(encode_public_key(&added_public_key)?.as_slice());
+        }
+        Ok(epoch_bits)
+    }
+    /// Encodes the block to LE bytes
+    pub fn encode_index_to_bytes(&self) -> Result<Vec<u8>, EncodingError> {
+        Ok(bits_to_bytes(&self.encode_index_to_bits()?))
+    }
+
+    pub fn encode_block_data_to_bytes(&self) -> Result<Vec<u8>, EncodingError> {
+        Ok(bits_to_bytes(&self.encode_block_data_to_bits()?))
+    }
+
 }
 
 /// Serializes the first and last epoch to bytes, hashes them with Blake2 personalized to

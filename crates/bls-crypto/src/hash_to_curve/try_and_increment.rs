@@ -17,6 +17,14 @@ use algebra::{
     AffineCurve, ConstantSerializedSize, Zero,
 };
 
+use algebra::{
+    bls12_377::{Bls12_377, Fq12, G1Projective, G2Affine, G2Projective},
+    CanonicalDeserialize, CanonicalSerialize, One, PairingEngine, ProjectiveCurve,
+    SerializationError,
+};
+
+use std::ops::Neg;
+
 use once_cell::sync::Lazy;
 
 const NUM_TRIES: u8 = 255;
@@ -371,10 +379,44 @@ mod non_compat_tests {
     use crate::hash_to_curve::try_and_increment::COMPOSITE_HASH_TO_G1;
     use algebra::bls12_377::Parameters;
     use rand::SeedableRng;
+    use algebra::FromBytes;
     use rand_xorshift::XorShiftRng;
 
     #[test]
     fn test_hash_to_curve_g1() {
+        let p1 = algebra::bls12_377::G1Affine::prime_subgroup_generator().neg();
+        println!("Point in G1 {}", p1);
+        match algebra::bls12_377::G1Affine::get_point_from_x(p1.x, false) {
+            Some(pp) => println!("reconstruct {}", pp),
+            None => println!("didnt work")
+        }
+
+        match algebra::bls12_377::G1Affine::get_point_from_x(p1.x, true) {
+            Some(pp) => {
+                println!("reconstruct {}", pp);
+                let mut bytes = vec![];
+                pp.serialize(&mut bytes);
+                println!("Serialize 2 {:?}", bytes);
+            }
+            None => println!("didnt work")
+        }
+
+        let mut bytes = vec![];
+        p1.serialize(&mut bytes);
+        println!("Serialize {:?}", bytes);
+        println!("Reading {}", algebra::bls12_377::Fq::read(&*bytes).unwrap());
+
+        let p = algebra::bls12_377::G2Affine::prime_subgroup_generator().neg();
+        println!("Point in G2 {}", p);
+
+        match algebra::bls12_377::G2Affine::get_point_from_x(p.x, false) {
+            Some(pp) => println!("reconstruct {}", pp),
+            None => println!("didnt work")
+        }
+
+        println!("fq2 one {}", algebra::bls12_377::FQ2_ONE);
+
+        println!("x*y = {}", p.x*p.y);
         let mut rng = XorShiftRng::from_seed([
             0x5d, 0xbe, 0x62, 0x59, 0x8d, 0x31, 0x3d, 0x76, 0x32, 0x37, 0xdb, 0x17, 0xe5, 0xbc,
             0x06, 0x54,

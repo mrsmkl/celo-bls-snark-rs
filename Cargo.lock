@@ -23,7 +23,14 @@ name = "algebra"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core",
+ "algebra-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+]
+
+[[package]]
+name = "algebra"
+version = "0.1.0"
+dependencies = [
+ "algebra-core 0.1.0",
 ]
 
 [[package]]
@@ -31,9 +38,23 @@ name = "algebra-core"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core-derive",
+ "algebra-core-derive 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "derivative",
- "field-assembly",
+ "field-assembly 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "num-traits",
+ "rand",
+ "rayon",
+ "rustc_version",
+ "unroll",
+]
+
+[[package]]
+name = "algebra-core"
+version = "0.1.0"
+dependencies = [
+ "algebra-core-derive 0.1.0",
+ "derivative",
+ "field-assembly 0.1.0",
  "num-traits",
  "rand",
  "rayon",
@@ -45,6 +66,15 @@ dependencies = [
 name = "algebra-core-derive"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
+dependencies = [
+ "proc-macro2 1.0.18",
+ "quote 1.0.7",
+ "syn 1.0.33",
+]
+
+[[package]]
+name = "algebra-core-derive"
+version = "0.1.0"
 dependencies = [
  "proc-macro2 1.0.18",
  "quote 1.0.7",
@@ -104,6 +134,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "bench-utils"
+version = "0.1.0"
+
+[[package]]
 name = "bitflags"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -136,13 +170,13 @@ dependencies = [
 name = "bls-crypto"
 version = "0.1.4"
 dependencies = [
- "algebra",
- "bench-utils",
+ "algebra 0.1.0",
+ "bench-utils 0.1.0",
  "blake2s_simd",
  "byteorder",
  "clap",
  "criterion",
- "crypto-primitives",
+ "crypto-primitives 0.1.0",
  "csv",
  "env_logger",
  "hex 0.3.2",
@@ -159,12 +193,12 @@ dependencies = [
 name = "bls-gadgets"
 version = "0.1.4"
 dependencies = [
- "algebra",
+ "algebra 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "bls-crypto",
- "crypto-primitives",
- "groth16",
- "r1cs-core",
- "r1cs-std",
+ "crypto-primitives 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "groth16 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-std 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "rand",
  "rand_xorshift",
  "tracing",
@@ -174,14 +208,14 @@ dependencies = [
 name = "bls-snark-sys"
 version = "0.1.4"
 dependencies = [
- "algebra",
+ "algebra 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "bls-crypto",
  "epoch-snark",
- "groth16",
+ "groth16 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "hex 0.4.2",
  "log",
  "once_cell",
- "r1cs-core",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "rand",
 ]
 
@@ -391,16 +425,34 @@ name = "crypto-primitives"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core",
- "bench-utils",
+ "algebra-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "bench-utils 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "blake2",
  "derivative",
  "digest",
- "ff-fft",
- "gm17",
- "groth16",
- "r1cs-core",
- "r1cs-std",
+ "ff-fft 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "gm17 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "groth16 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-std 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "rand",
+ "rayon",
+]
+
+[[package]]
+name = "crypto-primitives"
+version = "0.1.0"
+dependencies = [
+ "algebra-core 0.1.0",
+ "bench-utils 0.1.0",
+ "blake2",
+ "derivative",
+ "digest",
+ "ff-fft 0.1.0",
+ "gm17 0.1.0",
+ "groth16 0.1.0",
+ "r1cs-core 0.1.0",
+ "r1cs-std 0.1.0",
  "rand",
  "rayon",
 ]
@@ -470,17 +522,17 @@ dependencies = [
 name = "epoch-snark"
 version = "0.1.4"
 dependencies = [
- "algebra",
- "bench-utils",
+ "algebra 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "bench-utils 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "blake2s_simd",
  "bls-crypto",
  "bls-gadgets",
  "byteorder",
- "crypto-primitives",
- "groth16",
+ "crypto-primitives 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "groth16 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "hex 0.4.2",
- "r1cs-core",
- "r1cs-std",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-std 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "rand",
  "rand_xorshift",
  "thiserror",
@@ -493,7 +545,16 @@ name = "ff-fft"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core",
+ "algebra-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "rand",
+ "rayon",
+]
+
+[[package]]
+name = "ff-fft"
+version = "0.1.0"
+dependencies = [
+ "algebra-core 0.1.0",
  "rand",
  "rayon",
 ]
@@ -503,7 +564,14 @@ name = "field-assembly"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "mince",
+ "mince 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+]
+
+[[package]]
+name = "field-assembly"
+version = "0.1.0"
+dependencies = [
+ "mince 0.1.0",
 ]
 
 [[package]]
@@ -531,10 +599,23 @@ name = "gm17"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core",
- "bench-utils",
- "ff-fft",
- "r1cs-core",
+ "algebra-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "bench-utils 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "ff-fft 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "rand",
+ "rayon",
+ "smallvec",
+]
+
+[[package]]
+name = "gm17"
+version = "0.1.0"
+dependencies = [
+ "algebra-core 0.1.0",
+ "bench-utils 0.1.0",
+ "ff-fft 0.1.0",
+ "r1cs-core 0.1.0",
  "rand",
  "rayon",
  "smallvec",
@@ -545,10 +626,22 @@ name = "groth16"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core",
- "bench-utils",
- "ff-fft",
- "r1cs-core",
+ "algebra-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "bench-utils 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "ff-fft 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "rand",
+ "rayon",
+]
+
+[[package]]
+name = "groth16"
+version = "0.1.0"
+dependencies = [
+ "algebra-core 0.1.0",
+ "bench-utils 0.1.0",
+ "ff-fft 0.1.0",
+ "r1cs-core 0.1.0",
  "rand",
  "rayon",
 ]
@@ -687,6 +780,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "mince"
+version = "0.1.0"
+dependencies = [
+ "quote 1.0.7",
+ "syn 1.0.33",
+]
+
+[[package]]
 name = "num-integer"
 version = "0.1.43"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -804,7 +905,15 @@ name = "r1cs-core"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra-core",
+ "algebra-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+ "smallvec",
+]
+
+[[package]]
+name = "r1cs-core"
+version = "0.1.0"
+dependencies = [
+ "algebra-core 0.1.0",
  "smallvec",
 ]
 
@@ -813,9 +922,18 @@ name = "r1cs-std"
 version = "0.1.0"
 source = "git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1#38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1"
 dependencies = [
- "algebra",
+ "algebra 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
  "derivative",
- "r1cs-core",
+ "r1cs-core 0.1.0 (git+https://github.com/scipr-lab/zexe?rev=38b6f6f2c6b9a6a1b5e8eb90b1287c98b06520d1)",
+]
+
+[[package]]
+name = "r1cs-std"
+version = "0.1.0"
+dependencies = [
+ "algebra 0.1.0",
+ "derivative",
+ "r1cs-core 0.1.0",
 ]
 
 [[package]]

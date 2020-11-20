@@ -14,6 +14,7 @@ fn xof_digest_length_to_node_offset(
     let offset = node_offset as u64
         | ((xof_digest_length_bytes[0] as u64) << 32)
         | ((xof_digest_length_bytes[1] as u64) << 40);
+    println!("offset {} node {}", offset, node_offset);
     Ok(offset)
 }
 
@@ -63,6 +64,7 @@ impl Hasher for DirectHasher {
                 .fanout(0)
                 .max_depth(0)
                 .personal(domain)
+                // .node_offset(i as u64)
                 .node_offset(xof_digest_length_to_node_offset(
                     i as u64,
                     xof_digest_length,

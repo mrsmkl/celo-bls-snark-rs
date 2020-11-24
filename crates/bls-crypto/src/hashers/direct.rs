@@ -14,7 +14,7 @@ fn xof_digest_length_to_node_offset(
     let offset = node_offset as u64
         | ((xof_digest_length_bytes[0] as u64) << 32)
         | ((xof_digest_length_bytes[1] as u64) << 40);
-    println!("offset {} node {}", offset, node_offset);
+    // println!("offset {} node {}", offset, node_offset);
     Ok(offset)
 }
 

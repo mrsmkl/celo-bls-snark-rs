@@ -107,22 +107,24 @@ where
             let msg_for_xof = &[&counter, extra_data, &inner_hash].concat();
             let candidate_hash = self.hasher.xof(domain, msg_for_xof, hash_bytes)?;
 
+            println!("possible bytes {:?}", &candidate_hash[..num_bytes]);
             // handle the Celo deployed bit extraction logic
-            #[cfg(feature = "compat")]
+            // #[cfg(feature = "compat")]
             let candidate_hash = {
                 use algebra::serialize::{Flags, SWFlags};
 
                 let mut candidate_hash = candidate_hash[..num_bytes].to_vec();
                 let positive_flag = candidate_hash[num_bytes - 1] & 2 != 0;
                 if positive_flag {
+                    println!("positive");
                     candidate_hash[num_bytes - 1] |= SWFlags::PositiveY.u8_bitmask();
                 } else {
+                    println!("negative");
                     candidate_hash[num_bytes - 1] &= !SWFlags::PositiveY.u8_bitmask();
                 }
                 candidate_hash
             };
 
-            println!("possible bytes {:?}", &candidate_hash[..num_bytes]);
             if let Some(p) = GroupAffine::<P>::from_random_bytes(&candidate_hash[..num_bytes]) {
                 trace!(
                     "succeeded hashing \"{}\" to curve in {} tries",
